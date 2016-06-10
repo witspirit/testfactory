@@ -58,6 +58,16 @@ public class TestUserTestFactory {
         // Can the phone number be the hashcode of the first name ?
         // In the current approach we are not passing in the current status of the object
         // But we can build it on top as needed
+        DependentProvider<String, String> nameToPhone = DependentProvider.dependency(new NameProvider(), name -> "+" + name.hashCode());
+
+        UserTestFactory factory = new UserTestFactory().setFirstName(nameToPhone.source()).setPhone(nameToPhone.dependent());
+
+        // A bit more overkill Java8 streams, just because we can :-)
+        IntStream.range(0, 100)
+                .mapToObj(i -> factory.newUser())
+                .forEach(user -> Assert.assertEquals("+"+user.getFirstName().hashCode(), user.getPhone()) );
+
+        // Looks a bit tricky doesn't it with this dependent provider... Probably at the wrong level of abstraction
 
     }
 }
