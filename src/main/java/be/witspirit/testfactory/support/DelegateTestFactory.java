@@ -24,8 +24,8 @@ public class DelegateTestFactory<T> implements TestFactory<T> {
     }
 
     @Override
-    public T create() {
-        T newInstance = sourceFactory.create();
+    public T get() {
+        T newInstance = sourceFactory.get();
         override(newInstance);
         return newInstance;
     }

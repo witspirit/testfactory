@@ -13,13 +13,11 @@ import java.util.function.Supplier;
  */
 public class CarTestFactory implements TestFactory<Car> {
 
-    private Supplier<Vin> vin = ValueProviders.factory(new VinTestFactory());
-    // Not sure which style is the clearest... I think I prefer the ValueProviders wrapper
-    // private Supplier<Vin> vin = new VinTestFactory()::create;
-    private Supplier<EngineSpec> engine = ValueProviders.factory(new EngineSpecFactory());
+    private Supplier<Vin> vin = new VinTestFactory();
+    private Supplier<EngineSpec> engine = new EngineSpecFactory();
 
     @Override
-    public Car create() {
+    public Car get() {
         return new Car()
                 .setVin(vin.get())
                 .setEngine(engine.get())

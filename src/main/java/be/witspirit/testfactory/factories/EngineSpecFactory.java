@@ -15,7 +15,7 @@ public class EngineSpecFactory implements TestFactory<EngineSpec> {
     private Supplier<Integer> displacement = ValueProviders.intWithin(1500, 2500);
 
     @Override
-    public EngineSpec create() {
+    public EngineSpec get() {
         return new EngineSpec(fuel.get(), displacement.get());
     }
 

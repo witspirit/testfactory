@@ -19,7 +19,7 @@ public class UserTestFactoryTest {
     public void verifySizes() {
         UserTestFactory factory = new UserTestFactory();
         for (int i=0; i < 100; i++) {
-            User user = factory.create();
+            User user = factory.get();
             Assert.assertEquals(20, user.getFirstName().length());
             Assert.assertEquals(60, user.getLastName().length());
             Assert.assertEquals(65, user.getEmail().length());
@@ -33,7 +33,7 @@ public class UserTestFactoryTest {
         boolean bertSeen = false;
         boolean sawSomethingElse = false;
         for (int i=0; i < 100; i++) {
-            if (factory.create().getFirstName().equals("Bert")) {
+            if (factory.get().getFirstName().equals("Bert")) {
                 bertSeen = true;
             } else {
                 sawSomethingElse = true;
@@ -50,7 +50,7 @@ public class UserTestFactoryTest {
         User user = new UserTestFactory()
                 .setFirstName(() -> "Bert")
                 .setPhone(() -> "+323" + IntStream.range(1, 8).mapToObj(i -> Integer.toString(i)).reduce("", String::concat))
-                .create();
+                .get();
 
         Assert.assertEquals("Bert", user.getFirstName());
         Assert.assertEquals(60, user.getLastName().length());
@@ -69,7 +69,7 @@ public class UserTestFactoryTest {
 
         // A bit more overkill Java8 streams, just because we can :-)
         IntStream.range(0, 100)
-                .mapToObj(i -> factory.create())
+                .mapToObj(i -> factory.get())
                 .forEach(user -> Assert.assertEquals("+"+user.getFirstName().hashCode(), user.getPhone()) );
 
         // Looks a bit tricky doesn't it with this dependent provider... Probably at the wrong level of abstraction
@@ -83,7 +83,7 @@ public class UserTestFactoryTest {
 
         // A bit more overkill Java8 streams, just because we can :-)
         IntStream.range(0, 100)
-                .mapToObj(i -> factory.create())
+                .mapToObj(i -> factory.get())
                 .forEach(user -> Assert.assertEquals("+"+user.getFirstName().hashCode(), user.getPhone()) );
 
         // I think this approach is much more manageable. No complex/unsafe dependent provider, which only worked ok for two dependent values

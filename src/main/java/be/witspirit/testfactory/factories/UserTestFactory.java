@@ -17,7 +17,7 @@ public class UserTestFactory implements TestFactory<User> {
     private Supplier<String> phone = ValueProviders.phone();
 
     @Override
-    public User create() {
+    public User get() {
         User user = new User();
         user.setFirstName(firstName.get());
         user.setLastName(lastName.get());

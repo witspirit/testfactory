@@ -14,7 +14,7 @@ public class VinTestFactory implements TestFactory<Vin> {
     private Supplier<String> rawVin = ValueProviders.randomString(17, 17);
 
     @Override
-    public Vin create() {
+    public Vin get() {
         return new Vin(rawVin.get());
     }
 

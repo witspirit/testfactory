@@ -11,7 +11,7 @@ public class CarTestFactoryTest {
 
     @Test
     public void simpleCar() {
-        Car car = new CarTestFactory().create();
+        Car car = new CarTestFactory().get();
 
         Assert.assertEquals(17, car.getVin().toString().length()); // Horrible test, but not sure how to do better
         Assert.assertNotNull(car.getEngine().getFuel());

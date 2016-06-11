@@ -33,7 +33,7 @@ public class ReflectiveTestFactory<T> implements TestFactory<T> {
     }
 
     @Override
-    public T create() {
+    public T get() {
         try {
             T obj = targetType.newInstance(); // Implies default constructor availability
             for (Method method : targetType.getMethods()) {
@@ -60,7 +60,7 @@ public class ReflectiveTestFactory<T> implements TestFactory<T> {
         }
 
         // We don't... Perhaps we can automatically reflect our way to provide it
-        Supplier<?> automaticTypeProvider = ValueProviders.factory(new ReflectiveTestFactory<>(parameterType));
+        Supplier<?> automaticTypeProvider = new ReflectiveTestFactory<>(parameterType);
         typeSuppliers.put(parameterType, automaticTypeProvider);
         return getValue(method);
     }

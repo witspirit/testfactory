@@ -6,7 +6,6 @@ import be.witspirit.testfactory.exampledomain.User;
 import be.witspirit.testfactory.exampledomain.Vin;
 import be.witspirit.testfactory.factories.EngineSpecFactory;
 import be.witspirit.testfactory.factories.VinTestFactory;
-import be.witspirit.testfactory.support.valueproviders.ValueProviders;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,7 +18,7 @@ public class ReflectiveTestFactoryTest {
     public void reflectiveUser() {
         ReflectiveTestFactory<User> factory = new ReflectiveTestFactory<>(User.class);
 
-        User user = factory.create();
+        User user = factory.get();
 
         Assert.assertNotNull(user);
         Assert.assertTrue(user.getFirstName().length() >= 10 && user.getFirstName().length() <= 20);
@@ -32,23 +31,23 @@ public class ReflectiveTestFactoryTest {
     public void reflectiveVin() {
         ReflectiveTestFactory<Vin> factory = new ReflectiveTestFactory<>(Vin.class);
 
-        factory.create();
+        factory.get();
     }
 
     @Test(expected = RuntimeException.class) // No default constructor
     public void reflectiveEngineSpec() {
         ReflectiveTestFactory<EngineSpec> factory = new ReflectiveTestFactory<>(EngineSpec.class);
 
-        factory.create();
+        factory.get();
     }
 
     @Test
     public void reflectiveCar() {
         ReflectiveTestFactory<Car> factory = new ReflectiveTestFactory<>(Car.class)
-                .provide(Vin.class, ValueProviders.factory(new VinTestFactory()))
-                .provide(EngineSpec.class, ValueProviders.factory(new EngineSpecFactory()));
+                .provide(Vin.class, new VinTestFactory())
+                .provide(EngineSpec.class, new EngineSpecFactory());
 
-        Car car = factory.create();
+        Car car = factory.get();
 
         Assert.assertEquals(17, car.getVin().toString().length()); // Horrible test, but not sure how to do better
         Assert.assertNotNull(car.getEngine().getFuel());

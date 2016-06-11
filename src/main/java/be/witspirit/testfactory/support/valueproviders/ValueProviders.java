@@ -40,8 +40,4 @@ public class ValueProviders {
         return () -> min - 1 + random.nextInt(max-min+1); // The -1 and +1 are there to avoid a 0 value as the bound
     }
 
-    public static <T> Supplier<T> factory(TestFactory<T> factory) {
-        return factory::create;
-    }
-
 }
