@@ -1,7 +1,7 @@
 package be.witspirit.testfactory;
 
 import be.witspirit.testfactory.exampledomain.User;
-import be.witspirit.testfactory.valueproviders.DependentProvider;
+import be.witspirit.testfactory.valueproviders.experimental.DependentProvider;
 import be.witspirit.testfactory.valueproviders.ValueProviders;
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,13 +9,13 @@ import org.junit.Test;
 import java.util.stream.IntStream;
 
 /**
- * Basic verification of the FieldSupplierUserTestFactory
+ * Basic verification of the UserTestFactory
  */
 public class TestUserTestFactory {
 
     @Test
     public void verifySizes() {
-        FieldSupplierUserTestFactory factory = new FieldSupplierUserTestFactory();
+        UserTestFactory factory = new UserTestFactory();
         for (int i=0; i < 100; i++) {
             User user = factory.create();
             Assert.assertEquals(20, user.getFirstName().length());
@@ -27,7 +27,7 @@ public class TestUserTestFactory {
 
     @Test
     public void selectedName() {
-        FieldSupplierUserTestFactory factory = new FieldSupplierUserTestFactory().setFirstName(ValueProviders.name());
+        UserTestFactory factory = new UserTestFactory().setFirstName(ValueProviders.name());
         boolean bertSeen = false;
         boolean sawSomethingElse = false;
         for (int i=0; i < 100; i++) {
@@ -45,7 +45,7 @@ public class TestUserTestFactory {
     @Test
     public void showMeJava8() {
         // A bit overkill, but just showing...
-        User user = new FieldSupplierUserTestFactory()
+        User user = new UserTestFactory()
                 .setFirstName(() -> "Bert")
                 .setPhone(() -> "+323" + IntStream.range(1, 8).mapToObj(i -> Integer.toString(i)).reduce("", String::concat))
                 .create();
@@ -63,7 +63,7 @@ public class TestUserTestFactory {
         // But we can build it on top as needed
         DependentProvider<String, String> nameToPhone = DependentProvider.dependency(ValueProviders.name(), name -> "+" + name.hashCode());
 
-        FieldSupplierUserTestFactory factory = new FieldSupplierUserTestFactory().setFirstName(nameToPhone.source()).setPhone(nameToPhone.dependent());
+        UserTestFactory factory = new UserTestFactory().setFirstName(nameToPhone.source()).setPhone(nameToPhone.dependent());
 
         // A bit more overkill Java8 streams, just because we can :-)
         IntStream.range(0, 100)
@@ -75,8 +75,9 @@ public class TestUserTestFactory {
 
     @Test
     public void dependentValuesRevisited() {
-        FieldSupplierUserTestFactory baseFactory = new FieldSupplierUserTestFactory().setFirstName(ValueProviders.name());
-        DelegateTestFactory<User> factory = new DelegateTestFactory<>(baseFactory).setOverrider(user -> user.setPhone("+" + user.getFirstName().hashCode()));
+        TestFactory<User> factory = new UserTestFactory()
+                .setFirstName(ValueProviders.name())
+                .customize(user -> user.setPhone("+" + user.getFirstName().hashCode()));
 
         // A bit more overkill Java8 streams, just because we can :-)
         IntStream.range(0, 100)

@@ -1,4 +1,4 @@
-package be.witspirit.testfactory.valueproviders;
+package be.witspirit.testfactory.valueproviders.experimental;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -7,6 +7,9 @@ import java.util.function.Supplier;
  * Allows to create values that are dependent on values supplied by another
  *
  * WARNING: Implementation is not thread-safe ! Each thread should have its own instance
+ *
+ * NOTE: This was created to illustrate that it could be done, but would be cumbersome. Don't recommend
+ * to actually use this approach. But it has lead to the creation of the customizer approach.
  */
 public class DependentProvider<SourceT, DependentT> {
 

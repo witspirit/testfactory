@@ -8,13 +8,12 @@ import java.util.function.Supplier;
 /**
  * Rudimentary start for a test factory
  */
-public class FieldSupplierUserTestFactory implements TestFactory<User> {
+public class UserTestFactory implements TestFactory<User> {
 
     private Supplier<String> firstName = ValueProviders.randomString(20,20);
     private Supplier<String> lastName = ValueProviders.randomString(60,60);
     private Supplier<String> email = ValueProviders.email();
     private Supplier<String> phone = ValueProviders.phone();
-
 
     @Override
     public User create() {
@@ -26,22 +25,22 @@ public class FieldSupplierUserTestFactory implements TestFactory<User> {
         return user;
     }
 
-    public FieldSupplierUserTestFactory setFirstName(Supplier<String> firstName) {
+    public UserTestFactory setFirstName(Supplier<String> firstName) {
         this.firstName = firstName;
         return this;
     }
 
-    public FieldSupplierUserTestFactory setLastName(Supplier<String> lastName) {
+    public UserTestFactory setLastName(Supplier<String> lastName) {
         this.lastName = lastName;
         return this;
     }
 
-    public FieldSupplierUserTestFactory setEmail(Supplier<String> email) {
+    public UserTestFactory setEmail(Supplier<String> email) {
         this.email = email;
         return this;
     }
 
-    public FieldSupplierUserTestFactory setPhone(Supplier<String> phone) {
+    public UserTestFactory setPhone(Supplier<String> phone) {
         this.phone = phone;
         return this;
     }

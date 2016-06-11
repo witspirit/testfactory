@@ -1,7 +1,7 @@
 package be.witspirit.testfactory;
 
 import be.witspirit.testfactory.valueproviders.CountProvider;
-import be.witspirit.testfactory.valueproviders.DependentProvider;
+import be.witspirit.testfactory.valueproviders.experimental.DependentProvider;
 import org.junit.Assert;
 import org.junit.Test;
 
