@@ -1,8 +1,10 @@
-package be.witspirit.testfactory;
+package be.witspirit.testfactory.factories;
 
 import be.witspirit.testfactory.exampledomain.User;
-import be.witspirit.testfactory.valueproviders.experimental.DependentProvider;
-import be.witspirit.testfactory.valueproviders.ValueProviders;
+import be.witspirit.testfactory.factories.UserTestFactory;
+import be.witspirit.testfactory.support.TestFactory;
+import be.witspirit.testfactory.support.valueproviders.experimental.DependentProvider;
+import be.witspirit.testfactory.support.valueproviders.ValueProviders;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,7 +13,7 @@ import java.util.stream.IntStream;
 /**
  * Basic verification of the UserTestFactory
  */
-public class TestUserTestFactory {
+public class UserTestFactoryTest {
 
     @Test
     public void verifySizes() {

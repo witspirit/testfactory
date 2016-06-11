@@ -1,4 +1,4 @@
-package be.witspirit.testfactory.valueproviders;
+package be.witspirit.testfactory.support.valueproviders;
 
 import java.util.function.Supplier;
 
@@ -6,20 +6,12 @@ import java.util.function.Supplier;
  * Just counts up on each delivery
  */
 public class CountProvider implements Supplier<Integer> {
-    private final int start;
     private final int increment;
-
     private int count;
 
     public CountProvider(int start, int increment) {
-        this.start = start;
         this.increment = increment;
-
         this.count = start;
-    }
-
-    public void reset() {
-        count = start;
     }
 
     @Override

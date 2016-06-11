@@ -1,4 +1,4 @@
-package be.witspirit.testfactory.valueproviders;
+package be.witspirit.testfactory.support.valueproviders;
 
 import java.util.Random;
 import java.util.function.Supplier;

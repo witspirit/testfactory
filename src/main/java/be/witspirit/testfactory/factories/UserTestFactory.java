@@ -1,7 +1,8 @@
-package be.witspirit.testfactory;
+package be.witspirit.testfactory.factories;
 
 import be.witspirit.testfactory.exampledomain.User;
-import be.witspirit.testfactory.valueproviders.ValueProviders;
+import be.witspirit.testfactory.support.TestFactory;
+import be.witspirit.testfactory.support.valueproviders.ValueProviders;
 
 import java.util.function.Supplier;
 

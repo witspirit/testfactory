@@ -1,7 +1,8 @@
-package be.witspirit.testfactory;
+package be.witspirit.testfactory.support.valueproviders.experimental;
 
-import be.witspirit.testfactory.valueproviders.CountProvider;
-import be.witspirit.testfactory.valueproviders.experimental.DependentProvider;
+import be.witspirit.testfactory.support.valueproviders.CountProvider;
+import be.witspirit.testfactory.support.valueproviders.ValueProviders;
+import be.witspirit.testfactory.support.valueproviders.experimental.DependentProvider;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -31,7 +32,7 @@ public class DependentProviderTest {
 
     @Test
     public void multipleInOrderTest() {
-        DependentProvider<Integer, String> depProvider = DependentProvider.dependency(new CountProvider(0, 1), i -> "Value " + i);
+        DependentProvider<Integer, String> depProvider = DependentProvider.dependency(ValueProviders.count(0, 1), i -> "Value " + i);
 
         Supplier<Integer> source = depProvider.source();
         Supplier<String> dependent = depProvider.dependent();
@@ -44,7 +45,7 @@ public class DependentProviderTest {
 
     @Test
     public void multipleOutOfOrderTest() {
-        DependentProvider<Integer, String> depProvider = DependentProvider.dependency(new CountProvider(0, 1), i -> "Value " + i);
+        DependentProvider<Integer, String> depProvider = DependentProvider.dependency(ValueProviders.count(0, 1), i -> "Value " + i);
 
         Supplier<Integer> source = depProvider.source();
         Supplier<String> dependent = depProvider.dependent();
@@ -57,7 +58,7 @@ public class DependentProviderTest {
 
     @Test
     public void multipleMixedOrderTest() {
-        DependentProvider<Integer, String> depProvider = DependentProvider.dependency(new CountProvider(0, 1), i -> "Value " + i);
+        DependentProvider<Integer, String> depProvider = DependentProvider.dependency(ValueProviders.count(0, 1), i -> "Value " + i);
 
         Supplier<Integer> source = depProvider.source();
         Supplier<String> dependent = depProvider.dependent();

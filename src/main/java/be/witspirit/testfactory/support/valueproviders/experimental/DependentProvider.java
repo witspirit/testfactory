@@ -1,4 +1,4 @@
-package be.witspirit.testfactory.valueproviders.experimental;
+package be.witspirit.testfactory.support.valueproviders.experimental;
 
 import java.util.function.Function;
 import java.util.function.Supplier;

@@ -1,4 +1,4 @@
-package be.witspirit.testfactory;
+package be.witspirit.testfactory.support;
 
 import java.util.function.Consumer;
 
