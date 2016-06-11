@@ -1,21 +1,19 @@
 package be.witspirit.testfactory;
 
+import be.witspirit.testfactory.exampledomain.User;
+import be.witspirit.testfactory.valueproviders.ValueProviders;
+
 import java.util.function.Supplier;
 
 /**
  * Rudimentary start for a test factory
  */
-public class FieldSupplierUserTestFactory implements UserTestFactory {
+public class FieldSupplierUserTestFactory implements TestFactory<User> {
 
-    private static final Supplier<String> FIRST_NAME_DEFAULT = ValueProviders.randomString(20,20);
-    private static final Supplier<String> LAST_NAME_DEFAULT = ValueProviders.randomString(60,60);
-    private static final Supplier<String> EMAIL_DEFAULT = ValueProviders.email();
-    private static final Supplier<String> PHONE_DEFAULT = ValueProviders.phone();
-
-    private Supplier<String> firstName = FIRST_NAME_DEFAULT;
-    private Supplier<String> lastName = LAST_NAME_DEFAULT;
-    private Supplier<String> email = EMAIL_DEFAULT;
-    private Supplier<String> phone = PHONE_DEFAULT;
+    private Supplier<String> firstName = ValueProviders.randomString(20,20);
+    private Supplier<String> lastName = ValueProviders.randomString(60,60);
+    private Supplier<String> email = ValueProviders.email();
+    private Supplier<String> phone = ValueProviders.phone();
 
 
     @Override

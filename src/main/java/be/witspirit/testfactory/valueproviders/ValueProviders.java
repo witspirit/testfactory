@@ -1,4 +1,8 @@
-package be.witspirit.testfactory;
+package be.witspirit.testfactory.valueproviders;
+
+import org.apache.commons.lang.RandomStringUtils;
+
+import java.util.function.Supplier;
 
 /**
  * Factory for value providers
@@ -13,12 +17,12 @@ public class ValueProviders {
         return new CountProvider(start, increment);
     }
 
-    public static EmailProvider email() {
-        return new EmailProvider();
+    public static Supplier<String> email() {
+        return () -> RandomStringUtils.randomAlphanumeric(30)+"@"+RandomStringUtils.randomAlphabetic(30)+"."+RandomStringUtils.randomAlphabetic(3);
     }
 
-    public static PhoneProvider phone() {
-        return new PhoneProvider();
+    public static Supplier<String> phone() {
+        return () -> "+"+ RandomStringUtils.randomNumeric(11);
     }
 
     public static RandomStringProvider randomString(int minSize, int maxSize) {

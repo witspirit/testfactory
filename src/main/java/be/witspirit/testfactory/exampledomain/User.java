@@ -1,4 +1,4 @@
-package be.witspirit.testfactory;
+package be.witspirit.testfactory.exampledomain;
 
 /**
  * Sample 'model' class

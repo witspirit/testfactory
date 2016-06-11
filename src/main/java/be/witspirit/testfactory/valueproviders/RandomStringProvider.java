@@ -1,4 +1,4 @@
-package be.witspirit.testfactory;
+package be.witspirit.testfactory.valueproviders;
 
 import org.apache.commons.lang.RandomStringUtils;
 

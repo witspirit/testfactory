@@ -1,5 +1,8 @@
 package be.witspirit.testfactory;
 
+import be.witspirit.testfactory.exampledomain.User;
+import be.witspirit.testfactory.valueproviders.DependentProvider;
+import be.witspirit.testfactory.valueproviders.ValueProviders;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,7 +15,7 @@ public class TestUserTestFactory {
 
     @Test
     public void verifySizes() {
-        UserTestFactory factory = new FieldSupplierUserTestFactory();
+        FieldSupplierUserTestFactory factory = new FieldSupplierUserTestFactory();
         for (int i=0; i < 100; i++) {
             User user = factory.create();
             Assert.assertEquals(20, user.getFirstName().length());
@@ -24,7 +27,7 @@ public class TestUserTestFactory {
 
     @Test
     public void selectedName() {
-        UserTestFactory factory = new FieldSupplierUserTestFactory().setFirstName(ValueProviders.name());
+        FieldSupplierUserTestFactory factory = new FieldSupplierUserTestFactory().setFirstName(ValueProviders.name());
         boolean bertSeen = false;
         boolean sawSomethingElse = false;
         for (int i=0; i < 100; i++) {
@@ -60,7 +63,7 @@ public class TestUserTestFactory {
         // But we can build it on top as needed
         DependentProvider<String, String> nameToPhone = DependentProvider.dependency(ValueProviders.name(), name -> "+" + name.hashCode());
 
-        UserTestFactory factory = new FieldSupplierUserTestFactory().setFirstName(nameToPhone.source()).setPhone(nameToPhone.dependent());
+        FieldSupplierUserTestFactory factory = new FieldSupplierUserTestFactory().setFirstName(nameToPhone.source()).setPhone(nameToPhone.dependent());
 
         // A bit more overkill Java8 streams, just because we can :-)
         IntStream.range(0, 100)
